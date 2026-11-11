@@ -178,6 +178,72 @@
       font-weight: bold;
     }
 
+    /* Desktop Pricing Layout: Gold 75% centered */
+    @media (min-width: 900px) {
+      .pricing-grid {
+        grid-template-columns: 1fr 1fr;
+        justify-items: stretch;
+      }
+      .price-card.gold {
+        grid-column: 1 / -1;
+        width: 75%;
+        max-width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        justify-self: center;
+      }
+    }
+
+    /* Mobile package accordion */
+    .package-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--gold-primary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 0;
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .package-header {
+      cursor: default;
+    }
+
+    @media (max-width: 899px) {
+      .package-toggle {
+        display: inline-block;
+      }
+      .package-header {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        user-select: none;
+      }
+      .price-card .package-content {
+        overflow: hidden;
+        transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+      }
+      .price-card:not(.expanded) .package-content {
+        max-height: 0;
+        opacity: 0;
+        margin: 0;
+        pointer-events: none;
+      }
+      .price-card.expanded .package-content {
+        max-height: 2000px;
+        opacity: 1;
+      }
+      .price-card:not(.expanded) .package-toggle {
+        transform: rotate(0deg);
+      }
+      .price-card.expanded .package-toggle {
+        transform: rotate(180deg);
+      }
+    }
+
     /* Testimonials */
     .testimonials {
       background-color: var(--card-bg);
@@ -275,6 +341,80 @@
       background-color: #1EBE57;
     }
 
+    /* FAQ Section */
+    .faq-section {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      margin-bottom: 60px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      overflow: hidden;
+    }
+
+    .faq-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 25px 30px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+
+    .faq-header:hover {
+      background: rgba(212, 175, 55, 0.05);
+    }
+
+    .faq-header .section-title {
+      margin: 0;
+      font-size: 1.8rem;
+      text-align: left;
+    }
+
+    .faq-arrow {
+      font-size: 1.4rem;
+      color: var(--gold-primary);
+      transition: transform 0.3s ease;
+      line-height: 1;
+    }
+
+    .faq-section.open .faq-arrow {
+      transform: rotate(180deg);
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 30px;
+    }
+
+    .faq-section.open .faq-content {
+      max-height: 5000px;
+      padding: 0 30px 30px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      padding: 18px 0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .faq-answer {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
     footer {
       text-align: center;
       padding: 30px;
@@ -300,48 +440,66 @@
     <div class="pricing-grid">
       
       <!-- Basic Care -->
-      <div class="price-card">
-        <h3 class="card-title">BASIC CARE</h3>
-        <div class="price">$350 <span>/ month</span></div>
-        <p class="card-subtitle">Unoccupied homes & overseas owners needing regular check-ins.</p>
-        <ul class="features-list">
-          <li>Weekly / Bi-weekly home inspections & ventilation</li>
-          <li>Monthly photo/video status report via WhatsApp</li>
-          <li>Utility & property tax bill management</li>
-          <li>Immediate emergency response dispatch</li>
-        </ul>
-        <a href="https://wa.me/972509499715?text=Hi%20Aharon,%20I'm%20interested%20in%20the%20Basic%20Care%20package" class="btn" target="_blank">Select Package</a>
+      <div class="price-card package-basic" id="pkg-basic">
+        <div class="package-header" onclick="togglePackage('pkg-basic')">
+          <div>
+            <h3 class="card-title">BASIC CARE <span class="package-toggle">▼</span></h3>
+            <div class="price">$350 <span>/ month</span></div>
+            <p class="card-subtitle">Unoccupied homes & overseas owners needing regular check-ins.</p>
+          </div>
+        </div>
+        <div class="package-content">
+          <ul class="features-list">
+            <li>Weekly / Bi-weekly home inspections & ventilation</li>
+            <li>Monthly photo/video status report via WhatsApp</li>
+            <li>Utility & property tax bill management</li>
+            <li>Immediate emergency response dispatch</li>
+          </ul>
+          <a href="https://wa.me/972509499715?text=Hi%20Aharon,%20I'm%20interested%20in%20the%20Basic%20Care%20package" class="btn" target="_blank">Select Package</a>
+        </div>
       </div>
 
       <!-- Premium Care -->
-      <div class="price-card popular">
+      <div class="price-card popular package-premium expanded" id="pkg-premium">
         <div class="popular-badge">Most Popular</div>
-        <h3 class="card-title">PREMIUM CARE</h3>
-        <div class="price">$650 <span>/ month</span></div>
-        <p class="card-subtitle">High-value homes requiring full management & owner arrival prep.</p>
-        <ul class="features-list">
-          <li><strong>Everything in Basic Care +</strong></li>
-          <li>Full contractor supervision (electricians, plumbers, repairs)</li>
-          <li>Owner Arrival Prep (deep cleaning, fridge stocking, HVAC setup)</li>
-          <li>On-site presence during all maintenance visits</li>
-        </ul>
-        <a href="https://wa.me/972509499715?text=Hi%20Aharon,%20I'm%20interested%20in%20the%20Premium%20Care%20package" class="btn" target="_blank">Select Package</a>
+        <div class="package-header" onclick="togglePackage('pkg-premium')">
+          <div>
+            <h3 class="card-title">PREMIUM CARE <span class="package-toggle">▼</span></h3>
+            <div class="price">$650 <span>/ month</span></div>
+            <p class="card-subtitle">High-value homes requiring full management & owner arrival prep.</p>
+          </div>
+        </div>
+        <div class="package-content">
+          <ul class="features-list">
+            <li><strong>Everything in Basic Care +</strong></li>
+            <li>Full contractor supervision (electricians, plumbers, repairs)</li>
+            <li>Owner Arrival Prep (deep cleaning, fridge stocking, HVAC setup)</li>
+            <li>On-site presence during all maintenance visits</li>
+          </ul>
+          <a href="https://wa.me/972509499715?text=Hi%20Aharon,%20I'm%20interested%20in%20the%20Premium%20Care%20package" class="btn" target="_blank">Select Package</a>
+        </div>
       </div>
 
       <!-- Gold Concierge -->
-      <div class="price-card">
-        <h3 class="card-title">GOLD CONCIERGE</h3>
-        <div class="price">$1,200 <span>/ month</span></div>
-        <p class="card-subtitle">Luxury estates, villas, and full white-glove lifestyle support.</p>
-        <ul class="features-list">
-          <li><strong>Everything in Premium Care +</strong></li>
-          <li>Full Concierge Services (reservations, airport transfers, housekeeping)</li>
-          <li>Frequent property walkthroughs & vehicle maintenance</li>
-          <li>Insurance claims & major renovation oversight</li>
-          <li>24/7 priority emergency handling</li>
-          <li>Dedicated personal estate manager</li>
-        </ul>
-        <a href="https://wa.me/972509499715?text=Hi%20Aharon,%20I'm%20interested%20in%20the%20Gold%20Concierge%20package" class="btn" target="_blank">Select Package</a>
+      <div class="price-card package-gold gold" id="pkg-gold">
+        <div class="package-header" onclick="togglePackage('pkg-gold')">
+          <div>
+            <h3 class="card-title">GOLD CONCIERGE <span class="package-toggle">▼</span></h3>
+            <div class="price">$1,200 <span>/ month</span></div>
+            <p class="card-subtitle">Luxury estates, villas, and full white-glove lifestyle support.</p>
+          </div>
+        </div>
+        <div class="package-content">
+          <ul class="features-list">
+            <li><strong>Everything in Premium Care +</strong></li>
+            <li>Full Concierge Services (reservations, airport transfers, housekeeping)</li>
+            <li>Frequent property walkthroughs & vehicle maintenance</li>
+            <li>Insurance claims & major renovation oversight</li>
+            <li>24/7 priority emergency handling</li>
+            <li>Dedicated personal estate manager</li>
+          </ul>
+          <a href="https://wa.me/972509499715?text=Hi%20Aharon,%20I'm%20interested%20in%20the%20Gold%20Concierge%20package" class="btn" target="_blank">Select Package</a>
+        </div>
       </div>
 
     </div>
@@ -366,7 +524,6 @@
       <h2 class="section-title">Protect Your Jerusalem Property</h2>
       <p class="section-desc">Get in touch with a trusted local partner today</p>
       
-      <!-- Replace YOUR_FORMSPREE_ID with a real Formspree form endpoint to enable email submissions -->
       <form class="contact-form" action="https://formspree.io/f/mpppgdpb" method="POST">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
@@ -383,11 +540,139 @@
       </div>
     </div>
 
+    <!-- FAQ Section (Collapsible) -->
+    <div class="faq-section" id="faqSection">
+      <div class="faq-header" onclick="toggleFaq()">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-content">
+        <div class="faq-item">
+          <div class="faq-question">1. What happens if there’s an emergency while I’m overseas?</div>
+          <div class="faq-answer">We provide immediate emergency response dispatch. For Premium and Gold clients we are on-site during critical events and coordinate plumbers, electricians, or security as needed. You receive real-time updates via WhatsApp.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">2. How do you handle Arnona (property tax) and utility bills?</div>
+          <div class="faq-answer">We manage Arnona, water, electricity, and gas bills on your behalf. Bills are reviewed, paid when due (from an authorized account or with your approval), and you receive clear monthly summaries so there are never surprises.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">3. Can you prepare the house for our arrival before Chagim or summer?</div>
+          <div class="faq-answer">Yes. Premium and Gold packages include full Owner Arrival Prep: deep cleaning, HVAC testing and activation, fridge stocking with basics, fresh linens, and any special requests so the home is ready the moment you walk in.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">4. Do you supervise contractors and repairs?</div>
+          <div class="faq-answer">Absolutely. We source reliable, vetted local contractors, obtain quotes, supervise all work on-site, and only approve completion once the standard meets our (and your) expectations. You stay informed without having to manage from abroad.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">5. How often will I receive updates about my property?</div>
+          <div class="faq-answer">Basic Care includes a monthly photo/video status report. Premium and Gold clients receive more frequent updates, especially around maintenance visits, weather events, or any incidents. All communication is via WhatsApp for speed and convenience.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">6. Is the service suitable for completely empty / unoccupied homes?</div>
+          <div class="faq-answer">Yes. Basic Care is specifically designed for unoccupied properties. Regular inspections, ventilation, and bill management keep the home healthy and prevent the problems that arise from long vacancy.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">7. What about insurance claims if something is damaged?</div>
+          <div class="faq-answer">Gold Concierge includes full insurance-claim support and major renovation oversight. We document damage thoroughly, coordinate with your insurer, and manage the repair process end-to-end.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">8. Can you help with short-term rentals or Airbnb if we decide to rent?</div>
+          <div class="faq-answer">While our core focus is private estate care for owners, we can advise and coordinate trusted local partners for short-term rental management if you choose that route. Discuss your goals with Aharon for tailored recommendations.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">9. How do you handle HVAC and air-conditioning systems?</div>
+          <div class="faq-answer">We perform regular checks, seasonal start-up and shut-down, filter changes, and coordinate professional servicing. Before your arrival we ensure the system is clean, working, and set to a comfortable temperature.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">10. What if I need keys or access arranged for family or guests?</div>
+          <div class="faq-answer">We securely manage keys and can provide controlled access to approved family members or guests according to your written instructions. For Gold clients this is handled by your dedicated estate manager.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">11. Do you offer services for vehicles left in Israel?</div>
+          <div class="faq-answer">Yes. Gold Concierge includes vehicle maintenance checks, battery care, and coordination of servicing so your car is ready when you need it.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">12. How quickly can you respond to a water leak or electrical issue?</div>
+          <div class="faq-answer">Emergency dispatch is activated immediately upon notification. For Premium and Gold packages we aim for same-day on-site presence whenever possible, depending on the nature of the issue and location in Jerusalem.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">13. Are your services available for apartments as well as houses and villas?</div>
+          <div class="faq-answer">Yes. We manage apartments, townhouses, and full villas across Jerusalem. Package recommendations are based on property size, value, and your level of involvement rather than property type alone.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">14. Can I change packages or pause service if my plans change?</div>
+          <div class="faq-answer">Yes. Packages are flexible. Contact Aharon to upgrade, downgrade, or adjust the level of service according to your travel schedule or changing needs.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">15. How do you ensure the home stays well-ventilated and free of mold?</div>
+          <div class="faq-answer">Regular inspections include opening windows for ventilation (weather permitting), checking for moisture, and addressing any early signs of mold or dampness before they become serious problems.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">16. What documentation or authorizations do you need from me?</div>
+          <div class="faq-answer">Typically a simple management agreement, copies of relevant bills, and written authorization for payments and contractor access. We keep the process straightforward and transparent.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">17. Do you provide housekeeping or deep-cleaning services?</div>
+          <div class="faq-answer">Deep cleaning and ongoing housekeeping are included in Premium (arrival prep) and fully covered under Gold Concierge. We work with trusted, professional cleaners who know high-end properties.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">18. Can you help with major renovations or upgrades?</div>
+          <div class="faq-answer">Gold Concierge includes major renovation oversight—from contractor selection and permitting guidance to daily supervision and quality control—so you can upgrade your property without being on site.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">19. Is there a minimum contract period?</div>
+          <div class="faq-answer">We generally work on a month-to-month or annual basis depending on your preference. Discuss the best arrangement for your situation with Aharon; flexibility is important to us.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">20. How do I get started?</div>
+          <div class="faq-answer">Simply message Aharon on WhatsApp (+972-50-9499715) or use the contact form above. Tell us about your property and needs, and we’ll recommend the right package and next steps within a short time.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <footer>
     &copy; 2026 S&L Jerusalem Estate Care & Concierge. All rights reserved.
   </footer>
+
+  <script>
+    // FAQ toggle (entire section)
+    function toggleFaq() {
+      const section = document.getElementById('faqSection');
+      section.classList.toggle('open');
+    }
+
+    // Package accordion (mobile only)
+    function togglePackage(id) {
+      // Only toggle on mobile viewports
+      if (window.innerWidth >= 900) return;
+      const card = document.getElementById(id);
+      if (card) {
+        card.classList.toggle('expanded');
+      }
+    }
+
+    // On load: ensure correct default expanded states for mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.innerWidth < 900) {
+        // Premium starts expanded, others collapsed
+        document.getElementById('pkg-premium').classList.add('expanded');
+        document.getElementById('pkg-basic').classList.remove('expanded');
+        document.getElementById('pkg-gold').classList.remove('expanded');
+      } else {
+        // Desktop: everything visible (no collapse)
+        document.querySelectorAll('.price-card').forEach(c => c.classList.add('expanded'));
+      }
+    });
+
+    // Handle resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth >= 900) {
+        document.querySelectorAll('.price-card').forEach(c => c.classList.add('expanded'));
+      }
+    });
+  </script>
 
 </body>
 </html>
