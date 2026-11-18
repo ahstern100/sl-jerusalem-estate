@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | S&L Jerusalem Estate Care & Concierge</title>
+  <meta name="description" content="Expert insights on protecting unoccupied homes in Jerusalem. Bilingual articles in English and Hebrew for overseas property owners.">
+  <meta name="robots" content="index, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Heebo:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0F172A;
+      --bg-card: #1E293B;
+      --bg-light: #F8FAFC;
+      --gold: #D4AF37;
+      --gold-light: #F3E5AB;
+      --text-light: #F1F5F9;
+      --text-muted: #94A3B8;
+      --text-dark: #0F172A;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', 'Heebo', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(180deg, #0B1329 0%, var(--bg-dark) 100%);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      padding: 1.25rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .brand-text {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.03em;
+    }
+
+    .brand-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: rgba(212, 175, 55, 0.45);
+      color: var(--gold-light);
+    }
+
+    .btn-outline:hover {
+      background: rgba(212, 175, 55, 0.12);
+      border-color: var(--gold);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #0B1329;
+      border-color: var(--gold);
+    }
+
+    .btn-gold:hover {
+      background: #E5C04A;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 3.5rem 1.5rem 2.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Articles grid */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      flex: 1;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+    }
+
+    .articles {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .article-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .article-card:hover {
+      border-color: rgba(212, 175, 55, 0.5);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-body {
+      padding: 1.75rem 1.75rem 1.5rem;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .badge-en {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+
+    .badge-he {
+      background: rgba(148, 163, 184, 0.15);
+      color: #CBD5E1;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      font-family: 'Heebo', sans-serif;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      color: var(--text-light);
+      margin-bottom: 0.6rem;
+      line-height: 1.35;
+    }
+
+    .card-title a:hover {
+      color: var(--gold-light);
+    }
+
+    .card-excerpt {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.65;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .card-actions .btn {
+      font-size: 0.8rem;
+      padding: 0.45rem 0.95rem;
+    }
+
+    /* Language note */
+    .lang-note {
+      margin-top: 2.5rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(212, 175, 55, 0.06);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 10px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .lang-note strong {
+      color: var(--gold-light);
+    }
+
+    /* Footer */
+    footer {
+      background: #0B1329;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .footer-copy {
+      color: #64748B;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .brand-text { font-size: 1rem; }
+      .card-body { padding: 1.35rem; }
+      .card-title { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="../index.html" class="brand">
+        <img src="../logo.jpg" alt="S&L Logo">
+        <div>
+          <div class="brand-text">S&L</div>
+          <div class="brand-sub">Jerusalem Estate Care</div>
+        </div>
+      </a>
+      <div class="nav-actions">
+        <a href="../index.html" class="btn btn-outline">← Back to Home</a>
+        <a href="https://wa.me/972509499715" class="btn btn-gold" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>S&L Insights</h1>
+    <p>Practical guidance for overseas owners of Jerusalem properties — available in English and Hebrew.</p>
+  </section>
+
+  <main class="container">
+    <div class="section-label">Latest Articles</div>
+
+    <div class="articles">
+      <article class="article-card">
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="badge badge-en">English</span>
+            <span class="badge badge-he">עברית</span>
+          </div>
+          <h2 class="card-title">
+            <a href="protecting-unoccupied-jerusalem-home.html">
+              5 Silent Dangers Threatening Your Unoccupied Home in Jerusalem
+            </a>
+          </h2>
+          <p class="card-excerpt">
+            Why leaving a luxury apartment empty for months requires professional local oversight — and how to prevent costly damage before it starts.
+          </p>
+          <div class="card-actions">
+            <a href="protecting-unoccupied-jerusalem-home.html?lang=en" class="btn btn-gold">Read in English</a>
+            <a href="protecting-unoccupied-jerusalem-home.html?lang=he" class="btn btn-outline">קרא בעברית</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="lang-note">
+      <strong>Bilingual content</strong> — Every article includes a full English (LTR) and Hebrew (RTL) version with a one-click language switcher.
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="https://wa.me/972509499715" target="_blank" rel="noopener">WhatsApp Contact</a>
+        <a href="tel:+972509499715">+972-50-9499715</a>
+      </div>
+      <p class="footer-copy">© S&L Jerusalem Estate Care & Concierge. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
